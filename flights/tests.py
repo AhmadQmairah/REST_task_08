@@ -425,7 +425,6 @@ class ProfileDetails(APITestCase):
 		response = self.client.post(reverse('login'), self.user_data)
 		self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + response.data['access'])
 		response = self.client.get(reverse("profile-details"))
-
 		self.assertEqual(response.data['user'], {"first_name": self.user.first_name, "last_name": self.user.last_name})
 		past_bookings = Booking.objects.filter(user=self.user, date__lt=date.today())
 		past_bookings_list = []
